@@ -1,0 +1,10 @@
+<section class="contact-details">
+    <contact-preview [contact]="contact"></contact-preview>
+
+    <section class="contact-dashboard">
+        <button (click)="onBack()">Back</button>
+        <button (click)="onTransferBitcoin()">Should I Tranfer Bitcoin?</button>
+        <span>{{msg}}</span>
+        <span>{{msg$|async}}</span>
+    </section>
+</section>

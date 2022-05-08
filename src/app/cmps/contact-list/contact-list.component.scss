@@ -1,0 +1,15 @@
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  .page-title {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    font-family: AvenirHeavy;
+    font-size: 3rem;
+  }
+}

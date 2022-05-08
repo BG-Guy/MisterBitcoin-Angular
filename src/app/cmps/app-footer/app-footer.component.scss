@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 100%;
+  .logo {
+    margin-right: auto;
+    font-size: 50px;
+    color: gold;
+    em {
+      font-style: normal;
+    }
+  }
+  .copyrights {
+    margin-left: auto;
+    font-size: 30px;
+    color: gold;
+  }
+}

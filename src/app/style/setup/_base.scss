@@ -1,0 +1,103 @@
+body {
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+li,
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  :hover {
+    color: white;
+  }
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+
+  * {
+    pointer-events: none;
+  }
+}
+
+input {
+  font-family: inherit;
+  text-align: inherit;
+}
+
+.img-container {
+  height: 100%;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+.navbar,
+.footer {
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+
+@function rem($size) {
+  $remSize: calc($size / 16px);
+  @return calc(($remSize) * 1rem);
+}
+
+@function em($pixels, $context: 16px) {
+  @return calc(($pixels/$context) * 1em);
+}
+
+@function lh($pixels, $context: 16px) {
+  @return calc(($pixels/$context));
+}
+
+.navbar-container,
+.footer-container,
+.main-content-container {
+  width: 100vw;
+}
+
+.main-content-container {
+  min-height: 80vh;
+}
+
+.footer-container,
+.navbar-container {
+  height: 10vh;
+  background-color: transparent;
+  z-index: 10;
+  position: relative;
+}
+
+.footer-container {
+  bottom: 0px;
+  background-color: transparent;
+}

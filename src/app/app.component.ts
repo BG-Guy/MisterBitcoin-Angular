@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MisterBitcoin-Angular';
+
+  scroll: number
+
+  ngOnInit(): void {
+     document.addEventListener('scroll', () => {
+      this.scroll = window.scrollY / 100
+    })
+  }
 }
