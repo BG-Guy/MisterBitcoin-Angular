@@ -11,19 +11,17 @@ import { UtilsService } from './utils-service.service';
 })
 
 export class ContactService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private utilsService: UtilsService) { }
 
-  KEY = 'contacts';
+  KEY = 'contactsDB';
   
-
-
-
-  private _contactsDb: Contact[] = [
-    {
-      _id: "5a56640269f443a5d64b32ca",
+  private _contactsDb: Contact[] = this.utilsService.load(this.KEY) || [
+  {
+    _id: "5a56640269f443a5d64b32ca",
       name: "Ochoa Hyde",
       email: "ochoahyde@renovize.com",
       phone: "+1 (968) 593-3824",
+      image: `https://robohash.org/5a56640269f443a5d64b32ca?set=set5`,
       transfers: [{contactId: '', amount: '', Date: '', sent: null}],
 
     },
@@ -125,7 +123,6 @@ export class ContactService {
     },
     {
       _id: "5a56640298ab77236845b82b",
-  
       name: "Glenna Santana",
       email: "glennasantana@renovize.com",
       phone: "+1 (860) 467-2376",
@@ -170,7 +167,6 @@ export class ContactService {
       email: "lillyconner@renovize.com",
       phone: "+1 (842) 587-3812",
       transfers: [{contactId: '', amount: '', Date: '', sent: null}],
-
     },
   ];
 
@@ -182,21 +178,23 @@ export class ContactService {
 
   public query() {
     const filterBy = this._filterBy$.getValue()
-    const contacts = this._contactsDb.filter(({ name }) => {
+    console.log(this._contactsDb);
+    let contacts = this._contactsDb
+    contacts = contacts.filter(({ name }) => {
       return name.toLowerCase().includes(filterBy.term.toLowerCase())
     })
     this._contacts$.next(contacts)
   }
 
   public shouldTransferBitcoin() {
-    return this.http.get<{ answer: string }>('https://yesno.wtf/api')
+    return this.http.get<{ image: string }>('https://yesno.wtf/api')
         .pipe(
-            map(res => res.answer)
+            map(res => res.image)
         )
 }
 
   public getEmptyContact() {
-    return { name: '', email: '', phone: '', _id: this._makeId() }
+    return { name: '', email: '', phone: '' }
   }
 
   public remove(contactId: string) {
@@ -204,6 +202,7 @@ export class ContactService {
     const contactIdx = contacts.findIndex(contact => contact._id === contactId)
     contacts.splice(contactIdx, 1)
     this._contacts$.next(contacts)
+    this.utilsService.store(this.KEY, contacts);
     return of({})
   }
 
@@ -223,8 +222,11 @@ export class ContactService {
 
   private _add(contact: Contact) {
     contact._id = this._makeId()
+    contact.image = `https://robohash.org/${contact.name}?set=set5`
+    const contacts = this._contactsDb
     this._contactsDb.push(contact)
-    this._contacts$.next([...this._contactsDb])
+    this._contacts$.next([...contacts])
+    this.utilsService.store(this.KEY, this._contacts$);
     return of(contact)
   }
 
@@ -233,6 +235,7 @@ export class ContactService {
     const contactIdx = contacts.findIndex(_contact => _contact._id === contact._id)
     contacts.splice(contactIdx, 1, contact)
     this._contacts$.next([...contacts])
+    this.utilsService.store(this.KEY, this._contacts$);
     return of(contact)
   }
 

@@ -1,5 +1,10 @@
 body {
   margin: 0px;
+
+  .modal-open {
+    background-color: white;
+    overflow: hidden;
+  }
 }
 
 * {
@@ -100,4 +105,9 @@ p {
 .footer-container {
   bottom: 0px;
   background-color: transparent;
+}
+
+input {
+  border: none;
+  outline: none;
 }

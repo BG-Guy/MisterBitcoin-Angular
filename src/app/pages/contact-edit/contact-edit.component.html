@@ -11,10 +11,8 @@
         <label for="email">Email</label>
         <input [(ngModel)]="contact.email" (ngModelChange)="handleEmailChange($event)" type="text"
             name="email" id="email">
-
         <button>Save</button>
     </form>
-
     <div class="contact-preview-container">
         <contact-preview [contact]="contact" ></contact-preview>
     </div>

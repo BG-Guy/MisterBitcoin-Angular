@@ -29,5 +29,16 @@
     backdrop-filter: blur(3px);
     padding: 1rem;
     margin: 1rem;
+    color: aliceblue;
+    .image-container {
+      width: 50%;
+      height: 50%;
+      img {
+        border-radius: 50%;
+        width: 50%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+      }
+    }
   }
 }

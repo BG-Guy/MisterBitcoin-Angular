@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Contact } from '../../models/contact.model';
+import { ContactService } from 'src/app/services/contact.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -11,11 +14,31 @@ import { Contact } from '../../models/contact.model';
 })
 export class ContactListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private contactService: ContactService,
+    private route: ActivatedRoute,
+    private router: Router,
+
+    ) { }
+
   @Input() contacts: Contact[]
   @Output('remove') onRemove = new EventEmitter<string>()
 
-  ngOnInit(): void {
-  }
+  contact: Contact
 
+  ngOnInit(): void {
+      this.contact = this.contactService.getEmptyContact() as Contact
+      console.log(this.contact);
+      
+   
+  }
+  
+  async onSaveContact() {
+    // const contact = JSON.parse(JSON.stringify(this.contact),
+
+    await this.contactService.save({ ...this.contact }).toPromise()
+
+
+    // this.contactService.query
+  }
 }

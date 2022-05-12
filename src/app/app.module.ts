@@ -15,6 +15,7 @@ import { ContactEditComponent } from './pages/contact-edit/contact-edit.componen
 import { ContactsPageComponent } from './pages/contacts-page/contacts-page.component';
 import { LottieModule } from 'ngx-lottie';
 import { DetailsPipe } from './pages/details.pipe';
+import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { DetailsPipe } from './pages/details.pipe';
     ContactDetailsComponent,
     ContactEditComponent,
     ContactsPageComponent,
-    DetailsPipe
+    DetailsPipe,
+    LoginModalComponent
   ],
   imports: [
     BrowserModule,

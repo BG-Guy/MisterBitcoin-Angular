@@ -1,0 +1,15 @@
+<div class="modal-container">
+    <div class="login-modal">
+        <h1 class="modal-title">Login</h1>
+        <button class="close-btn" (toggle)="onModalToggle()" >X</button>
+        <form (ngSubmit)="onLogin()">
+            <label for="username">Username
+                <input placeholder="Enter Username" type="text" name="username" id="username">
+            </label>
+            <label for="password">Password
+                <input placeholder="Enter password" type="text" name="password" id="password">
+            </label>
+            <button>Login</button>
+        </form>
+    </div>
+</div>

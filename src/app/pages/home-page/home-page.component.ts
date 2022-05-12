@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
-import { LottieService } from '../../services/lottie-service.service';
 
 @Component({
   selector: 'home-page',
@@ -9,7 +8,7 @@ import { LottieService } from '../../services/lottie-service.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor( private lottieService: LottieService ) {}
+  constructor( ) {}
 
 
   ngOnInit(): void {

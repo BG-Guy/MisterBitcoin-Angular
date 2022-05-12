@@ -52,10 +52,12 @@ export class ContactDetailsComponent implements OnInit {
     this.contactService.shouldTransferBitcoin().subscribe(msg => {
       this.cd.markForCheck()
       this.msg = msg
+      console.log(msg);
+      
       setTimeout(() => {
         this.cd.markForCheck()
         this.msg = ''
-      }, 1500)
+      }, 3000)
     })
   }
 
