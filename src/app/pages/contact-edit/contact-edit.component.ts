@@ -39,7 +39,6 @@ export class ContactEditComponent implements OnInit {
 }
 
 handleEmailChange(email: string) {
-    console.log('handleemailChange -> email', email)
     this.contact.email = email
 }
 

@@ -8,12 +8,13 @@ import { Transaction } from '../models/transaction.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   private KEY = 'user';
   private _user: User;
-  private _user$ = new BehaviorSubject<User>(this.utilsService.load(this.KEY) || null);
-  // private _transaction = new BehaviorSubject<Transaction>({})
+  // private _transaction = new BehaviorSubject<Transaction>()
+  private _user$ = new BehaviorSubject<User>(this.utilsService.load(this.KEY) || this.getGuestUser() );
   public user$ = this._user$.asObservable();
 
   constructor(private utilsService: UtilsService) { }
@@ -22,15 +23,46 @@ export class UserService {
     return this.user$;
   }
 
+  public getGuestUser() {
+    return {
+      name: 'Guest',
+      balance: 0,
+      transactions: 
+        [new Transaction()]
+    }
+  }
+
+  public getEmptyUser() {
+    return {name: '', balance: 0, transactions: [new Transaction()]}
+  }
+
+  public logout() {
+    let user = this.getGuestUser()
+    this._user$.next(user);
+
+  }
+
   public login(name: string): void {
-    let user = this.utilsService.load(this.KEY);
+    let users = this.utilsService.load('user')
+    console.log("🚀 ~ file: user.service.ts ~ line 47 ~ UserService ~ login ~ users", users)
+    let user = users.find((user) => {
+      user.name === name
+    })
+
     if (!user) {
-        let newUser = new User();
+        let newUser = this._user
         newUser.name = name;
+
         this.utilsService.store(this.KEY, newUser);
         this._user = newUser;
+        console.log("🚀 ~ file: user.service.ts ~ line 44 ~ UserService ~ login ~ newUser", newUser)
+        return
     }
-    this._user$.next(this._user);
+    let savedUser = this._user
+    savedUser.name = user.name
+    this._user$.next(savedUser);
+    this.utilsService.store('user', savedUser)
+    
 }
 
   public isAuthenticated(): boolean {

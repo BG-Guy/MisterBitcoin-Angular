@@ -1,7 +1,8 @@
 <section class="hero-container">
     <div class="greet-msg">
-        <h1 class="title">Hello, Guy</h1>
-        <h2 >Current Balance 2B</h2>
+        <h1 class="title">Hello, {{user.name}}</h1>
+        <h2 >Current Balance: {{user.balance}}B</h2>
+        <!-- <h2>Last Transactions: {{user.transactions[0] || 'No Transactions'}}</h2> -->
         <div class="cta-btn">
             <a href="">
                 <svg >

@@ -26,13 +26,13 @@ export class ContactsPageComponent implements OnInit, OnDestroy {
         this.contactService.query()
         this.contacts$ = this.contactService.contacts$
 
+
         // this.subscription = this.contactService.contacts$.subscribe(contacts => {
         //     this.contacts = contacts
         // })
     }
 
     onRemoveContact(contactId: string) {
-        console.log('contactId contact app:', contactId)
         this.contactService.remove(contactId)
         this.userMsgService.setMsg(`contact (${contactId}) removed!`)
 

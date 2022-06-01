@@ -15,7 +15,7 @@ export class ContactService {
 
   KEY = 'contactsDB';
   
-  private _contactsDb: Contact[] = this.utilsService.load(this.KEY) || [
+  private _contactsDb: Contact[] = this.utilsService.load(this.KEY)._value || [
   {
     _id: "5a56640269f443a5d64b32ca",
       name: "Ochoa Hyde",
@@ -178,7 +178,6 @@ export class ContactService {
 
   public query() {
     const filterBy = this._filterBy$.getValue()
-    console.log(this._contactsDb);
     let contacts = this._contactsDb
     contacts = contacts.filter(({ name }) => {
       return name.toLowerCase().includes(filterBy.term.toLowerCase())

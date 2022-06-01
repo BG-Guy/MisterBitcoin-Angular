@@ -27,9 +27,7 @@ export class ContactListComponent implements OnInit {
   contact: Contact
 
   ngOnInit(): void {
-      this.contact = this.contactService.getEmptyContact() as Contact
-      console.log(this.contact);
-      
+      this.contact = this.contactService.getEmptyContact() as Contact    
    
   }
   

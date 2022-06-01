@@ -31,13 +31,15 @@ export class UtilsService {
   }
 
   public store(key: string, any: any): void {
-    localStorage[key] = JSON.stringify(any,this._getCircularReplacer()) ;
+    localStorage[key] = JSON.stringify(any);
+    console.log("🚀 ~ file: utils-service.service.ts ~ line 35 ~ UtilsService ~ store ~ localStorage[key]", localStorage[key])
+    
   }
 
   public load(key: string): any {
     var str = localStorage[key] || null;
     
-    return JSON.parse(str)?._value;
+    return JSON.parse(str);
   }
 }
                                                                                                                                                                                         

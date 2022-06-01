@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -12,14 +13,17 @@ export class LoginModalComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   user: User
-
+  userSubscription: Subscription
 
   @Output ('toggle') onToggle = new EventEmitter()
  
+  public onLogin(user: any) {
 
-  public onLogin() {
-    this.userService.login(this.user.name)
+    console.log("🚀 ~ file: login-modal.component.ts ~ line 22 ~ LoginModalComponent ~ onLogin ~ this.user", this.user)
+
     this.onToggle.emit()
+    this.userService.login(user)
+    this.userSubscription = this.userService.user$.subscribe(user => this.user = user);
   }
 
   onModalToggle() {
@@ -29,6 +33,7 @@ export class LoginModalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.userSubscription = this.userService.user$.subscribe(user => this.user = user);
   }
 
 }

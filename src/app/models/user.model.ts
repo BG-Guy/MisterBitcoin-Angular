@@ -1,7 +1,7 @@
 import { Transaction } from "./transaction.model"
 
-export class User {
-    name: string
-    balance: number
+export interface User {
+    name: string 
+    balance: number 
     transactions: Transaction[]
 } 

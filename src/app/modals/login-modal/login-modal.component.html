@@ -1,15 +1,17 @@
 <div class="modal-container">
     <div class="login-modal">
-        <h1 class="modal-title">Login</h1>
-        <button class="close-btn" (toggle)="onModalToggle()" >X</button>
-        <form (ngSubmit)="onLogin()">
-            <label for="username">Username
-                <input placeholder="Enter Username" type="text" name="username" id="username">
+        <div class="header">
+            <h1 class="modal-title">Login</h1>
+            <button class="close-btn" (click)="onModalToggle()" >X</button>
+        </div>
+        <form (ngSubmit)="onLogin($event)">
+                <label for="username">Username
+                    <input [(ngModel)]="user.name" type="text" name="username" id="username">
+                </label>
+                <label for="password">Password
+                    <input type="text" name="password" id="password">
             </label>
-            <label for="password">Password
-                <input placeholder="Enter password" type="text" name="password" id="password">
-            </label>
-            <button>Login</button>
+            <button class="login-btn">Login</button>
         </form>
     </div>
 </div>
